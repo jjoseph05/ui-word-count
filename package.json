@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "jest",
-    "test:fast" : "jest"
+    "test:fast": "jest"
   },
   "keywords": [],
   "author": "Justin Joseph",
@@ -16,6 +16,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "cli": "^1.0.1",
     "jest": "^24.1.0",
     "webpack": "^4.29.3",
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "redux": "^4.0.1"
   }
 }
