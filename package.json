@@ -1,12 +1,12 @@
 {
-  "name": "UI-word-frequency",
+  "name": "ui-word-frequency",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "jest",
-    "test:fast" : "jest --watch"
+    "test:fast" : "jest"
   },
   "keywords": [],
   "author": "Justin Joseph",
