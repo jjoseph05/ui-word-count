@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   module: {
     rules: [
@@ -11,13 +13,13 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
-  entry: './src/app.js',
+  entry: './src/App.js',
   output: {
-    path: __dirname + '/dist',
+    path: path.join(__dirname, '/dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: path.join(__dirname, '/dist')
   }
-}
+};

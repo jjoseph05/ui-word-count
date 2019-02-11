@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import WordFrequencyApp from './components/WordFrequencyApp';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux;';
+import { createStore } from 'redux';
 
 
 
