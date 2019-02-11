@@ -13,7 +13,13 @@ const initialState = {
 };
 
 const wordContainerReducer = (state = initialState, action) => {
+  console.log(action)
   switch (action.type) {
+    case 'ADD_USER_INPUT':
+      return {
+        ...state,
+        wordContainer: action.payload
+      }
     default:
       return state;
   }
@@ -35,4 +41,4 @@ console.log('Store state: ', store.getState());
 
 
 
-ReactDOM.render(<WordFrequencyApp />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
