@@ -1,16 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import analyzeText from '../util/analyzeText'
+import Action from '../../../udemy/indecision/src/components/Action';
+
+const ADD_USER_INPUT = "ADD_USER_INPUT";
+
+const AddUserInput = (userInput) => {
+  return {
+    type: ADD_USER_INPUT,
+    value: action.payload
+  };
+};
+
+mapStateToProps = (state) => {
+  return {
+    
+  };
+};
 
 export default class WordFrequencyApp extends React.Component {
   state = {
     inputData: {}
   };
 
+
   handleUserSubmit = (e) => {
     e.preventDefault();
     const userInput = analyzeText(e.target.elements.wordContent.value);
     this.setState(() => ({ inputData: userInput }));
-  }
+  };
 
   render() {
     const words = this.state.inputData;
@@ -25,7 +44,7 @@ export default class WordFrequencyApp extends React.Component {
       </div>
     )
   }
-}
+};
 
 const FrequencyCountList = (props) => {
   return ( 
