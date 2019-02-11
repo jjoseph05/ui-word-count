@@ -1,5 +1,5 @@
 import React from 'react';
-import analyzeText from '../helpers/analyzeText'
+import analyzeText from '../util/analyzeText'
 
 export default class WordFrequencyApp extends React.Component {
   state = {
@@ -46,7 +46,9 @@ const FrequencyCountList = (props) => {
 }
 
 const FrequencyCountItem = (props) => (
-  <span> &#123; {props.word} : {props.count} &#125;</span>
+  <div className="responsive-circle">
+    <div className="circle-inner"> &#123; {props.word} : {props.count} &#125;</div>
+  </div>
 );
 
 // props.inputData.map((word, index)=> (
