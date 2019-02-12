@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import analyzeText from '../util/analyzeText'
 
 const ADD_USER_INPUT = "ADD_USER_INPUT";
 
-const addUserInput = (userInput) => {
+const addUserInput = (wordCount) => {
   return {
     type: ADD_USER_INPUT,
-    payload: userInput
+    payload: wordCount
   };
 };
 
@@ -19,42 +18,71 @@ const mapStateToProps = (state) => {
 };
 
 class WordFrequencyApp extends React.Component {
-  // state = {
-  //   userInput: {}
-  // };
-  
-  handleUserSubmit = (e) => {
-    e.preventDefault();
-  
-    console.log(this.state, 'state');
-    console.log(this.props, 'props');
-    const cleanData = analyzeText(e.target.elements.wordContent.value);
-    this.props.dispatch(addUserInput(cleanData));
-  };
-
   render() {
     return (
       <div>
-        <form onSubmit={this.handleUserSubmit}>
-          <textarea rows="10" cols="50" name="wordContent"></textarea>
-          <button>Analyze</button>
-        </form>
+        <WordsForm onSubmit={(words) => {
+          this.props.dispatch(addUserInput(words))
+        }}/>
         <FrequencyCountList words={this.props.inputData.wordContainer}/>
       </div>
     )
   }
 };
 
+class WordsForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: props.words ? props.words.userInput : ''
+    }
+  }
+
+  onTextAreaChange = (e) => {
+    const userInput = e.target.value;
+    this.setState(()=> ({ userInput }))
+  }
+
+  handleWordFormSubmit = (e) => {
+    e.preventDefault();
+
+    this.props.onSubmit({
+      userInput: analyzeText(this.state.userInput)
+    })
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleWordFormSubmit}>
+        <textarea
+          rows="10"
+          cols="50"
+          value={this.state.userInput}
+          onChange={this.onTextAreaChange}
+        >
+        </textarea>
+        <button
+          disabled={!this.state.userInput}
+        >
+          Analyze
+        </button>
+      </form>
+    )
+  }
+}
+
 const FrequencyCountList = (props) => {
+  const { userInput: wordCount } = props.words;
+
   return ( 
     <div>
       <p>Word : Frequency</p>
-      {props.words &&
-        Object.keys(props.words).map((word, index) => (
+      {wordCount &&
+        Object.keys(wordCount).map((word, index) => (
           <FrequencyCountItem
             key={index}
             word={word}
-            count={props.words[word]}
+            count={wordCount[word]}
           />
         ))
       }
@@ -69,57 +97,3 @@ const FrequencyCountItem = (props) => (
 );
 
 export default connect(mapStateToProps)(WordFrequencyApp);
-// props.inputData.map((word, index)=> (
-//   Object.keys(word).map((key) => (
-//     <FrequencyCountItem
-//       key={index}
-//       word={key}
-//       count={word[key]}
-//   />
-//   ))
-// ))
-
-
-// class FrequencyCountList extends React.Component {
-//   render() {
-//     console.log(this.state, 'hello');
-//     const words = [ { 'hello' : 1 }, { 'yellow' : 2 }, { 'poop' : 21 } ];
-//     return (
-//       <div>
-//       <p>Word : Frequency</p>
-//       {words.length}
-//       {
-//         words.map((word, index)=> (
-//           Object.keys(word).map((key) => (
-//             <FrequencyCountItem
-//               key={index}
-//               word={key}
-//               count={word[key]}
-//           />
-//           ))
-//         ))
-//       }
-
-//     </div>
-//     )
-//   }
-// }
-
-
-
-
-// class ContentInputContainer extends React.Component {
-//   handleAnalyzeSumbit(e) {
-//     e.preventDefault();
-//     const contentForAnalysis = e.target.elements.wordContent.value;
-//   }
-
-//   render() {
-//     return (
-//       <form onSubmit={this.handleAnalyzeSumbit}>
-//         <textarea rows="10" cols="50" name="wordContent"></textarea>
-//         <button>Analyze</button>
-//       </form>
-//     )
-//   }
-// }
