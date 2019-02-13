@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import analyzeText from '../util/analyzeText'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, } from 'recharts';
+import analyzeText from '../util/analyzeText';
 
 const ADD_USER_INPUT = "ADD_USER_INPUT";
 
@@ -24,7 +25,9 @@ class WordFrequencyApp extends React.Component {
         <WordsForm onSubmit={(words) => {
           this.props.dispatch(addUserInput(words))
         }}/>
-        <FrequencyCountList words={this.props.inputData.wordContainer}/>
+        {this.props.inputData.wordContainer.userInput && 
+          <FrequencyGraph data={this.props.inputData.wordContainer}/>
+        }
       </div>
     )
   }
@@ -71,29 +74,21 @@ class WordsForm extends React.Component {
   }
 }
 
-const FrequencyCountList = (props) => {
-  const { userInput: wordCount } = props.words;
+const FrequencyGraph = (props) => {
+  const { userInput: data } = props.data;
 
-  return ( 
-    <div>
-      <p>Word : Frequency</p>
-      {wordCount &&
-        Object.keys(wordCount).map((word, index) => (
-          <FrequencyCountItem
-            key={index}
-            word={word}
-            count={wordCount[word]}
-          />
-        ))
-      }
-    </div>
-  )
+  return (
+    <ResponsiveContainer width="90%" height={500}>
+        <BarChart width={500} height={100} data={data}
+              margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+          <CartesianGrid strokeDasharray="3 3"/>
+          <XAxis dataKey="count"/>
+          <YAxis/>
+          <Tooltip/>
+          <Bar dataKey="word" dataKey="count" fill="red" />
+        </BarChart>
+    </ResponsiveContainer>
+  );
 }
-
-const FrequencyCountItem = (props) => (
-  <div className="responsive-circle">
-    <div className="circle-inner"> &#123; {props.word} : {props.count} &#125;</div>
-  </div>
-);
 
 export default connect(mapStateToProps)(WordFrequencyApp);
