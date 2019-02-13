@@ -62,6 +62,7 @@ class WordsForm extends React.Component {
           cols="50"
           value={this.state.userInput}
           onChange={this.onTextAreaChange}
+          spellCheck="false"
         >
         </textarea>
         <button
@@ -79,13 +80,13 @@ const FrequencyGraph = (props) => {
 
   return (
     <ResponsiveContainer width="90%" height={500}>
-        <BarChart width={500} height={100} data={data}
+        <BarChart width={1500} height={100} data={data}
               margin={{top: 5, right: 30, left: 20, bottom: 5}}>
           <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="count"/>
+          <XAxis dataKey="word" style={{display: "none"}}/>
           <YAxis/>
-          <Tooltip/>
-          <Bar dataKey="word" dataKey="count" fill="red" />
+          <Tooltip />
+          <Bar dataKey="count" fill="#5A87A9" />
         </BarChart>
     </ResponsiveContainer>
   );
