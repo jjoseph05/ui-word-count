@@ -10,7 +10,7 @@
     "test:fast": "jest --watch",
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "Justin Joseph",
