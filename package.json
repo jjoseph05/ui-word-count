@@ -2,11 +2,14 @@
   "name": "ui-word-frequency",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/jjoseph05/ui-word-count",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "jest",
-    "test:fast": "jest --watch"
+    "test:fast": "jest --watch",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "Justin Joseph",
@@ -25,6 +28,7 @@
   },
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-redux": "^6.0.0",
