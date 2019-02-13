@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "jest",
     "test:fast": "jest --watch",
-    "predeploy": "npm run build",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production",
     "deploy": "gh-pages -d build"
   },
   "keywords": [],
