@@ -14,11 +14,9 @@ describe('analyzeText', ()=> {
     const sentence = 'The quick \tbrown\n fox jumps \nover';
     expect(analyzeText(sentence)).toEqual(['The', 'quick', 'brown', 'fox', 'jumps', 'over']);
   });
-  
 
   it('handles long words', () => {
     const sentence = 'The quick \tbrown\n fox jumps \nover';
     expect(analyzeText(sentence)).toEqual(['The', 'quick', 'brown', 'fox', 'jumps', 'over']);
   });
-  
 })
