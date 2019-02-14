@@ -18,4 +18,8 @@ const FrequencyGraph = (props) => {
   );
 }
 
+// TODO think up a way to handle large dataSets and small ones with equal elegance in terms
+// of presentation...log scale is great for large data, but perhaps not great for a few points
+
+
 export default FrequencyGraph;
