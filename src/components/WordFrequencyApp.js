@@ -25,10 +25,12 @@ class WordFrequencyApp extends React.Component {
     return (
       <div>
         <Header subTitle={subTitle}/>
-        <WordsForm onSubmit={(words) => {
-          this.props.dispatch(addUserInput(words))
-        }}/>
-        {this.props.inputData.wordContainer.userInput && 
+        <div className="container">
+          <WordsForm onSubmit={(words) => {
+            this.props.dispatch(addUserInput(words))
+          }}/>
+        </div>
+        {this.props.inputData.wordContainer.userInput &&
           <FrequencyGraph data={this.props.inputData.wordContainer}/>
         }
       </div>
@@ -38,7 +40,7 @@ class WordFrequencyApp extends React.Component {
 
 const Header = (props) => (
   <div className="header">
-    <div>
+    <div className="container">
       <h1 className="header__title">{props.title}</h1>
       {props.subTitle && <h2 className="header__subtitle">{props.subTitle}</h2>}
     </div>
@@ -73,19 +75,26 @@ class WordsForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleWordFormSubmit}>
-        <textarea
-          rows="10"
-          cols="50"
-          value={this.state.userInput}
-          onChange={this.onTextAreaChange}
-          spellCheck="false"
-        >
-        </textarea>
-        <button
-          disabled={!this.state.userInput}
-        >
-          Analyze
-        </button>
+        <div>
+          <textarea
+            className="textarea"
+            rows="8"
+            cols="50"
+            value={this.state.userInput}
+            onChange={this.onTextAreaChange}
+            placeholder="Please enter text to analyze..."
+            spellCheck="false"
+          >
+          </textarea>
+        </div>
+        <div>
+          <button
+            className="big-button"
+            disabled={!this.state.userInput}
+          >
+            Analyze Text
+          </button>
+        </div>
       </form>
     )
   }
@@ -95,13 +104,13 @@ const FrequencyGraph = (props) => {
   const { userInput: data } = props.data;
 
   return (
-    <ResponsiveContainer width="90%" height={500}>
+    <ResponsiveContainer className="graph" width="90%" height={500}>
         <BarChart width={1500} height={100} data={data}
               margin={{top: 5, right: 30, left: 20, bottom: 5}}>
           <CartesianGrid strokeDasharray="3 3"/>
           <XAxis dataKey="word" style={{display: "none"}}/>
           <YAxis/>
-          <Tooltip />
+          <Tooltip/>
           <Bar dataKey="count" fill="#5A87A9" />
         </BarChart>
     </ResponsiveContainer>
