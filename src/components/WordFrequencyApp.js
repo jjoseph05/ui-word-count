@@ -20,8 +20,11 @@ const mapStateToProps = (state) => {
 
 class WordFrequencyApp extends React.Component {
   render() {
+    const subTitle = 'See what words you use the most!';
+
     return (
       <div>
+        <Header subTitle={subTitle}/>
         <WordsForm onSubmit={(words) => {
           this.props.dispatch(addUserInput(words))
         }}/>
@@ -31,6 +34,19 @@ class WordFrequencyApp extends React.Component {
       </div>
     )
   }
+};
+
+const Header = (props) => (
+  <div className="header">
+    <div className="container">
+      <h1 className="header__title">{props.title}</h1>
+      {props.subTitle && <h2 className="header__subtitle">{props.subTitle}</h2>}
+    </div>
+  </div>
+);
+
+Header.defaultProps = {
+  title: 'Word Count'
 };
 
 class WordsForm extends React.Component {
