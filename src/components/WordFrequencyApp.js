@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import addUserInput from '../actions/userInput';
 import Header from './Header';
-import WordsForm from './'
+import WordsForm from './WordsForm';
+import FrequencyGraph from './FrequencyGraph';
 
 class WordFrequencyApp extends React.Component {
   render() {
